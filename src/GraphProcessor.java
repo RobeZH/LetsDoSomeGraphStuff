@@ -41,7 +41,15 @@ public class GraphProcessor {
      * Graph which stores the dictionary words and their associated connections
      */
     private GraphADT<String> graph;
+    
+    /**
+     * HashTable which stores the distance between different Strings.
+     */
     private Hashtable<Pair<String, String>, Integer> distanceTable;
+    
+    /**
+     * HashTabel which stores the predecessor from one String to another String
+     */
     private Hashtable<Pair<String, String>, String> predecessorMap;
     
     /**
@@ -78,11 +86,11 @@ public class GraphProcessor {
         for(String string : wordList) {
             graph.addVertex(string);
         }
-        for(String str1 : wordList)
-            for(String str2 : wordList)
-                if(WordProcessor.isAdjacent(str1, str2))
-                    graph.addEdge(str1, str2);
-        
+        for(String str1 : wordList) {
+            for(String str2 : graph.getNeighbors(str1)) {
+                graph.addEdge(str1, str2);
+            }
+        }
         return wordList.size();
     }
 
@@ -143,7 +151,6 @@ public class GraphProcessor {
      * Any shortest path algorithm can be used (Djikstra's or Floyd-Warshall recommended).
      */
     public void shortestPathPrecomputation() {
-        final int INF = Integer.MAX_VALUE;
         Iterable<String> verticesList = graph.getAllVertices();
         distanceTable = new Hashtable<>();
         predecessorMap = new Hashtable<>();
@@ -155,7 +162,7 @@ public class GraphProcessor {
             LinkedList<Pair<String, Integer>> queue = new LinkedList<>();
             
             distanceTable.put(new Pair<String, String>(string, string), 0);
-            queue.add(new Pair<String, Integer>(string, 0));
+            queue.addLast(new Pair<String, Integer>(string, 0));
             visited.put(string, 1);
             while(!queue.isEmpty()) {
                 Pair<String, Integer> pair = queue.removeFirst();

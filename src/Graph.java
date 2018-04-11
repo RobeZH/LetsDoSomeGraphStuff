@@ -1,3 +1,7 @@
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Undirected and unweighted graph implementation
  * 
@@ -12,13 +16,23 @@ public class Graph<E> implements GraphADT<E> {
      * Instance variables and constructors
      */
 
+    private HashMap<E, Set<E>> adjacencyList;
+    
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public E addVertex(E vertex) {
-        return vertex;
+        if (vertex == null) {
+            return null;
+        }
         
+        if (this.adjacencyList.containsKey(vertex)) {
+            return null;
+        }
+        this.adjacencyList.put(vertex, new HashSet<E>());
+        return vertex;
     }
 
     /**
@@ -26,8 +40,20 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E removeVertex(E vertex) {
-        return vertex;
+        if (vertex == null) {
+            return null;
+        }
         
+        if (!this.adjacencyList.containsKey(vertex)) {
+            return null;
+        }
+        
+        this.adjacencyList.remove(vertex);
+        
+        for (E i: this.getAllVertices()) {
+            this.adjacencyList.get(i).remove(vertex);
+        }
+        return vertex;
     }
 
     /**
@@ -35,8 +61,19 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
-        return false;
+        if (vertex1 == null || vertex2 == null) {
+            return false;
+        }
+        if (!this.adjacencyList.containsKey(vertex1) || !this.adjacencyList.containsKey(vertex2)) {
+            return false;
+        }
+        if (vertex1.equals(vertex2)) {
+            return false;
+        }
         
+        this.adjacencyList.get(vertex1).add(vertex2);
+        this.adjacencyList.get(vertex2).add(vertex1);
+        return true;
     }    
 
     /**
@@ -44,8 +81,19 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
-        return false;
+        if (vertex1 == null || vertex2 == null) {
+            return false;
+        }
+        if (!this.adjacencyList.containsKey(vertex1) || !this.adjacencyList.containsKey(vertex2)) {
+            return false;
+        }
+        if (vertex1.equals(vertex2)) {
+            return false;
+        }
         
+        this.adjacencyList.get(vertex1).remove(vertex2);
+        this.adjacencyList.get(vertex2).remove(vertex1);
+        return true;
     }
 
     /**
@@ -53,8 +101,18 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean isAdjacent(E vertex1, E vertex2) {
-        return false;
+        if (vertex1 == null || vertex2 == null) {
+            return false;
+        }
+        if (!this.adjacencyList.containsKey(vertex1) || !this.adjacencyList.containsKey(vertex2)) {
+            return false;
+        }
+        if (vertex1.equals(vertex2)) {
+            return false;
+        }
         
+        
+        return false;
     }
 
     /**
@@ -62,8 +120,15 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getNeighbors(E vertex) {
-        return null;
+        if (vertex == null) {
+            return null;
+        }
         
+        if (!this.adjacencyList.containsKey(vertex)) {
+            return null;
+        }
+        
+        return this.adjacencyList.get(vertex);
     }
 
     /**
@@ -71,8 +136,8 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getAllVertices() {
-        return null;
-        
+        return this.adjacencyList.keySet();
     }
+    
 
 }
