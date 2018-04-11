@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 import javafx.util.Pair;
@@ -40,6 +42,7 @@ public class GraphProcessor {
      */
     private GraphADT<String> graph;
     private Hashtable<Pair<String, String>, Integer> distanceTable;
+    private Hashtable<Pair<String, String>, String> predecessorMap;
     
     /**
      * Constructor for this class. Initializes instances variables to set the starting state of the object
@@ -75,15 +78,12 @@ public class GraphProcessor {
         for(String string : wordList) {
             graph.addVertex(string);
         }
-        for(String str1 : wordList) {
-            for(String str2 : wordList) {
-                if(WordProcessor.isAdjacent(str1, str2)) {
+        for(String str1 : wordList)
+            for(String str2 : wordList)
+                if(WordProcessor.isAdjacent(str1, str2))
                     graph.addEdge(str1, str2);
-                }
-            }
-        }
         
-        return wordList.size();   
+        return wordList.size();
     }
 
     
@@ -105,8 +105,15 @@ public class GraphProcessor {
      * @return List<String> list of the words
      */
     public List<String> getShortestPath(String word1, String word2) {
-        return null;
-    
+        ArrayList<String> resList = new ArrayList<>();
+        String des = word2, start = word1;
+        resList.add(des);
+        while(des != start) {
+            des = predecessorMap.get(new Pair<String, String>(start, des));
+            resList.add(des);
+        }
+        Collections.reverse(resList);
+        return resList;
     }
     
     /**
@@ -139,30 +146,32 @@ public class GraphProcessor {
         final int INF = Integer.MAX_VALUE;
         Iterable<String> verticesList = graph.getAllVertices();
         distanceTable = new Hashtable<>();
+        predecessorMap = new Hashtable<>();
         
-        //Initialize the distance map
+        //Do BFS to calclulate the shortest path
         for(String string : verticesList) {
-            for(String string2 : verticesList) {
-                int dis;
-                if(string == string2) dis = 0;
-                else if(graph.isAdjacent(string, string2)) dis = 1;
-                else dis = INF;
-
-                distanceTable.put(new Pair<String, String>(string, string2), dis);
-                distanceTable.put(new Pair<String, String>(string2, string), dis);
-            }
-        }
-        
-        //Floyd-Warshall Updating
-        for(String midVertex : verticesList) {
-            for(String vertex1 : verticesList) {
-                for(String vertex2 : verticesList) {
-                    int newDistance = distanceTable.get(new Pair<String, String>(vertex1, midVertex))
-                                    + distanceTable.get(new Pair<String, String>(midVertex, vertex2));
-                    Pair<String,String> pair = new Pair<String, String>(vertex1, vertex2);
-                    distanceTable.put(pair, Math.min(newDistance, distanceTable.get(pair)));
+            Hashtable<String, Integer> visited = new Hashtable<>();
+            //The BFS queue 
+            LinkedList<Pair<String, Integer>> queue = new LinkedList<>();
+            
+            distanceTable.put(new Pair<String, String>(string, string), 0);
+            queue.add(new Pair<String, Integer>(string, 0));
+            visited.put(string, 1);
+            while(!queue.isEmpty()) {
+                Pair<String, Integer> pair = queue.removeFirst();
+                String currentString = pair.getKey();
+                int distance = pair.getValue();
+                for(String nextString : graph.getNeighbors(currentString)) {
+                    if(!visited.containsKey(nextString)) {
+                        visited.put(nextString, 1);
+                        distanceTable.put(new Pair<String, String>(string, nextString), distance + 1);
+                        predecessorMap.put(new Pair<String, String>(string, nextString), currentString);
+                        
+                        queue.addLast(new Pair<String, Integer>(nextString, distance + 1));
+                    }
                 }
             }
         }
+        
     }
 }

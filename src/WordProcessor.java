@@ -13,7 +13,7 @@ public class WordProcessor {
 	/**
 	 * Gets a Stream of words from the filepath.
 	 * 
-	 * The Stream should only contain trimmed, non-empty and UPPERCASE words.
+	 *  The Stream should only contain trimmed, non-empty and UPPERCASE words.
 	 * 
 	 * @see <a href="http://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html">java8 stream blog</a>
 	 * 
