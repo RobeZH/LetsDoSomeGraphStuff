@@ -65,7 +65,7 @@ public class WordProcessor {
 		 * 		streamOfLines.map(...).filter(a -> ...).map(...) and so on
 		 */
 		Stream<String> s;
-		s = Files.lines(Paths.get(filepath)).map(String::toUpperCase).map(String::trim).filter(x -> x != "");
+		s = Files.lines(Paths.get(filepath)).map(String::toUpperCase).map(String::trim).filter(x -> x != "" && x != null);
 	    s.close();
 		return s;
 	}
