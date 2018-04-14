@@ -81,14 +81,17 @@ public class GraphProcessor {
             return 0;
         }
         ArrayList<String> wordList = new ArrayList<String>();
+        
+        Collections.sort(wordList);
         stream.distinct().forEach(wordList::add);
         
-        for(String string : wordList) {
+        for(String string : wordList)
             graph.addVertex(string);
-        }
-        for(String str1 : wordList) {
-            for(String str2 : graph.getNeighbors(str1)) {
-                graph.addEdge(str1, str2);
+        
+        for(int i = 0; i < wordList.size(); i++) {
+            for(int j = i+1; j < wordList.size(); j++) {
+                String str1 = wordList.get(i), str2 = wordList.get(j);
+                if(WordProcessor.isAdjacent(str1, str2)) graph.addEdge(str1, str2);
             }
         }
         return wordList.size();
