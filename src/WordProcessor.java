@@ -1,3 +1,30 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title:           Dictionary Graph
+// Files:           Graph.java, GraphADT.java, GraphProcesser.java, 
+//                  GraphTest.java, GraphProcessorTest.java, WordProcessor.java
+// Course:          CS400 Spring2018
+// Due date:		4/16/2018
+//
+// Author:          Ziyi Zhang, Zidong Zhang, Matt Zimmers, Shuyan Zhang
+// Email:           Matt Zimmers: mzimmers@wisc.edu
+//					Ziyi Zhang: zzhang765@wisc.edu
+//					Zidong Zhang zzhang773@wisc.edu
+//					Shuyan Zhang: szhang399@wisc.edu 
+// Lecturer's Name: Deb Deppeler
+
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully 
+// acknowledge and credit those sources of help here.  Instructors and TAs do 
+// not need to be credited here, but tutors, friends, relatives, room mates 
+// strangers, etc do.  If you received no outside help from either type of 
+// source, then please explicitly indicate NONE.
+//
+// Persons:         
+// Online Sources:  (identify each URL and describe their assistance in detail)
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
