@@ -59,7 +59,7 @@ public class GraphProcessorTest {
 	// When eccountered any error, or accidentally returned -1 
 	// while this method populateGraph is actually working properly
 		expected = -1; 
-		actual = processor.populateGraph("src/files/GP_test.txt"); ;
+		actual = processor.populateGraph("D:\\Eclipse files\\X-team project\\LetsDoSomeGraphStuff\\files"); ;
 		if ( expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual + "\n error encountered!");
 	}
@@ -67,8 +67,9 @@ public class GraphProcessorTest {
 	public void test02_populateGraph_return_correct_number() {
 	// See if the populateGraph returns the correct number of 
 	// vertice(words) added 
-		expected = 441; // TODO: MAY MODIFY this number
-		actual = processor.populateGraph("src/files/GP_test.txt");
+		expected = 6; // TODO: MAY MODIFY this number
+		actual = processor.populateGraph("files/GP_test.txt");
+		System.out.println(actual);
 		if (! expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual);
 	}
@@ -83,7 +84,7 @@ public class GraphProcessorTest {
 	}
 	@Test
 	public void test04_getShortestPath_get_shortest_path() {
-		processor.populateGraph("src/files/GP_test.txt");		
+		processor.populateGraph("files/GP_test.txt");		
 		processor.shortestPathPrecomputation();
 
 		Sexpected = "[cat, hat, heat, wheat]";
@@ -97,7 +98,7 @@ public class GraphProcessorTest {
 	}
 	@Test
 	public void test05_getShortestDistance_get_distance_match_with_shortest_path() {
-		processor.populateGraph("src/files/GP_test.txt");
+		processor.populateGraph("files/GP_test.txt");
 		processor.shortestPathPrecomputation();
 		
 		expected = 3;
