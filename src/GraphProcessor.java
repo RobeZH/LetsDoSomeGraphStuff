@@ -148,7 +148,8 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
-        return distanceTable.get(new Pair<String, String>(word1, word2));
+        Integer dis = distanceTable.get(new Pair<String, String>(word1, word2));
+        return dis == null ? -1 : dis;
     }
     
     /**
