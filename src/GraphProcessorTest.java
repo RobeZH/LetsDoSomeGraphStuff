@@ -59,7 +59,7 @@ public class GraphProcessorTest {
 	// When eccountered any error, or accidentally returned -1 
 	// while this method populateGraph is actually working properly
 		expected = -1; 
-		actual = processor.populateGraph("D:\\Eclipse files\\X-team project\\LetsDoSomeGraphStuff\\files"); ;
+		actual = processor.populateGraph("files/GP_test.txt"); ;
 		if ( expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual + "\n error encountered!");
 	}
