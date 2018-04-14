@@ -18,6 +18,10 @@ public class Graph<E> implements GraphADT<E> {
 
     private HashMap<E, Set<E>> adjacencyList;
     
+    public Graph() {
+    	this.adjacencyList = new HashMap<>();
+    }
+    
     
     /**
      * {@inheritDoc}
