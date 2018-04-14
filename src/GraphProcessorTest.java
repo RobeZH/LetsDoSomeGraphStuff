@@ -54,18 +54,22 @@ public class GraphProcessorTest {
 	}
 	
 	@Test
+	/**
+	 * When eccountered any error, or accidentally returned -1 
+	 * while this method populateGraph is actually working properly
+	 */
 	public void test01_populateGraph_encounter_error() { 
-	// When eccountered any error, or accidentally returned -1 
-	// while this method populateGraph is actually working properly
 		expected = -1; 
 		actual = processor.populateGraph("D:\\Eclipse files\\X-team project\\LetsDoSomeGraphStuff\\files"); ;
 		if ( expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual + "\n error encountered!");
 	}
 	@Test
+	/**
+	 *  See if the populateGraph returns the correct number of 
+	 *  vertice(words) added 
+	 */
 	public void test02_populateGraph_return_correct_number() {
-	// See if the populateGraph returns the correct number of 
-	// vertice(words) added 
 		expected = 6; // TODO: MAY MODIFY this number
 		actual = processor.populateGraph("files/GP_test.txt");
 
@@ -73,12 +77,15 @@ public class GraphProcessorTest {
 			fail("expected: "+expected+ " actual: "+actual);
 	}
 	@Test
+	/**
+	 *  get the shortest path between two words for GP_test
+	 */
 	public void test03_getShortestPath_get_shortest_path() {
 		processor.populateGraph("files/GP_test.txt");		
 		processor.shortestPathPrecomputation();
 
 		Sexpected = "[cat, hat, heat, wheat]".toUpperCase();
-		Listactual = processor.getShortestPath("cat","wheat"); // this line 
+		Listactual = processor.getShortestPath("cat","wheat"); 
 		
 		String b = Listactual.toString();
 
@@ -86,6 +93,9 @@ public class GraphProcessorTest {
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
 	@Test
+	/**
+	 *  get the shortest distance between two words for GP_test
+	 */
 	public void test04_getShortestDistance_match_with_shortest_path() {
 		processor.populateGraph("files/GP_test.txt");
 		processor.shortestPathPrecomputation();
@@ -97,7 +107,11 @@ public class GraphProcessorTest {
 			fail ("expected:"+ expected+ "actual: "+ actual);
 	}
 	@Test
-	public void test05_getShortestPath_get_shortest_path_GP_large() {
+	/**
+	 *  get the shortest path between two words for GP_test_large(more words)
+	 */
+	public void test05_getShortestPath_get_shortest_path_GP_large() { 
+		// test for GP_large
 		processor.populateGraph("files/GP_test_large.txt");		
 		processor.shortestPathPrecomputation();
 
@@ -110,7 +124,11 @@ public class GraphProcessorTest {
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
 	@Test
+	/**
+	 *   get the shortest path between two words for GP_test_large(more words)
+	 */
 	public void test06_getShortestDistance_match_with_shortest_path_GP_large() {
+		// test for GP_large
 		processor.populateGraph("files/GP_test_large.txt");
 		processor.shortestPathPrecomputation();
 		
