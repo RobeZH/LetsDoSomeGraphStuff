@@ -13,9 +13,9 @@ import java.util.Set;
 public class Graph<E> implements GraphADT<E> {
     
     /**
-     * Instance variables and constructors
+     * Graph is represented by adjacencyList, E is vertex, Set<E> is 
+     * its adjacent vertex.
      */
-
     private HashMap<E, Set<E>> adjacencyList;
     
     public Graph() {
@@ -28,6 +28,9 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E addVertex(E vertex) {
+    	/**
+    	 * if vertex is null or vertex already exists.
+    	 */
         if (vertex == null) {
             return null;
         }
@@ -44,6 +47,9 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E removeVertex(E vertex) {
+    	/**
+    	 * if vertex is null or vertex does not exists.
+    	 */
         if (vertex == null) {
             return null;
         }
@@ -53,7 +59,9 @@ public class Graph<E> implements GraphADT<E> {
         }
         
         this.adjacencyList.remove(vertex);
-        
+        /**
+         * remove all edges containing the vertex
+         */
         for (E i: this.getAllVertices()) {
             this.adjacencyList.get(i).remove(vertex);
         }
@@ -65,6 +73,9 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
+    	/**
+    	 * if any vertex is null or does not exist, or two vertices are equal
+    	 */
         if (vertex1 == null || vertex2 == null) {
             return false;
         }
@@ -85,6 +96,9 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
+    	/**
+    	 * if any vertex is null or does not exist, or two vertices are equal
+    	 */
         if (vertex1 == null || vertex2 == null) {
             return false;
         }
