@@ -115,12 +115,15 @@ public class GraphProcessor {
      * @return List<String> list of the words
      */
     public List<String> getShortestPath(String word1, String word2) {
+        word1 = word1.toUpperCase(); word2 = word2.toUpperCase();
         ArrayList<String> resList = new ArrayList<>();
         
         //des is the destination, start is the starting point
         String des = word2, start = word1;
         resList.add(des);
         
+        //If the shotestDitance is -1, there is no shortest path
+        if(getShortestDistance(word1, word2) == -1) return null;
         //Recursively find the predecessor from start to destination
         while(des != start) {
             des = predecessorMap.get(new Pair<String, String>(start, des));
@@ -148,6 +151,7 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
+        word1 = word1.toUpperCase(); word2 = word2.toUpperCase();
         Integer dis = distanceTable.get(new Pair<String, String>(word1, word2));
         return dis == null ? -1 : dis;
     }
@@ -161,7 +165,6 @@ public class GraphProcessor {
         Iterable<String> verticesList = graph.getAllVertices();
         distanceTable = new Hashtable<>();
         predecessorMap = new Hashtable<>();
-        
         //Use BFS to calclulate the shortest path
         for(String string : verticesList) {
             Hashtable<String, Integer> visited = new Hashtable<>();

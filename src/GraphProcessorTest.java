@@ -1,5 +1,4 @@
 import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -59,7 +58,7 @@ public class GraphProcessorTest {
 	// When eccountered any error, or accidentally returned -1 
 	// while this method populateGraph is actually working properly
 		expected = -1; 
-		actual = processor.populateGraph("files/GP_test.txt"); ;
+		actual = processor.populateGraph("D:\\Eclipse files\\X-team project\\LetsDoSomeGraphStuff\\files"); ;
 		if ( expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual + "\n error encountered!");
 	}
@@ -94,7 +93,7 @@ public class GraphProcessorTest {
 		
 		expected = 3;
 		actual = processor.getShortestDistance("cat","wheat");
-		System.out.println(actual);
+		
 		if (!expected.equals(actual))
 			fail ("expected:"+ expected+ "actual: "+ actual);
 	}
