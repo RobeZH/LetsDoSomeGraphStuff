@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javafx.util.Pair;
 
@@ -80,10 +81,7 @@ public class GraphProcessor {
         } catch (IOException e) {
             return 0;
         }
-        ArrayList<String> wordList = new ArrayList<String>();
-        
-        Collections.sort(wordList);
-        stream.distinct().forEach(wordList::add);
+        List<String> wordList = stream.collect(Collectors.toList());
         
         for(String string : wordList)
             graph.addVertex(string);
@@ -91,6 +89,7 @@ public class GraphProcessor {
         for(int i = 0; i < wordList.size(); i++) {
             for(int j = i+1; j < wordList.size(); j++) {
                 String str1 = wordList.get(i), str2 = wordList.get(j);
+                //if adjacent, add edge between the two
                 if(WordProcessor.isAdjacent(str1, str2)) graph.addEdge(str1, str2);
             }
         }
@@ -117,8 +116,12 @@ public class GraphProcessor {
      */
     public List<String> getShortestPath(String word1, String word2) {
         ArrayList<String> resList = new ArrayList<>();
+        
+        //des is the destination, start is the starting point
         String des = word2, start = word1;
         resList.add(des);
+        
+        //Recursively find the predecessor from start to destination
         while(des != start) {
             des = predecessorMap.get(new Pair<String, String>(start, des));
             resList.add(des);
@@ -158,25 +161,28 @@ public class GraphProcessor {
         distanceTable = new Hashtable<>();
         predecessorMap = new Hashtable<>();
         
-        //Do BFS to calclulate the shortest path
+        //Use BFS to calclulate the shortest path
         for(String string : verticesList) {
             Hashtable<String, Integer> visited = new Hashtable<>();
-            //The BFS queue 
+            
+            //The BFS queue (using LinkedList)
             LinkedList<Pair<String, Integer>> queue = new LinkedList<>();
             
+            //Put the starting point in the queue
             distanceTable.put(new Pair<String, String>(string, string), 0);
             queue.addLast(new Pair<String, Integer>(string, 0));
             visited.put(string, 1);
+            
             while(!queue.isEmpty()) {
                 Pair<String, Integer> pair = queue.removeFirst();
                 String currentString = pair.getKey();
                 int distance = pair.getValue();
                 for(String nextString : graph.getNeighbors(currentString)) {
                     if(!visited.containsKey(nextString)) {
+                        //Updating the next position and push it to the BFS queue
                         visited.put(nextString, 1);
                         distanceTable.put(new Pair<String, String>(string, nextString), distance + 1);
                         predecessorMap.put(new Pair<String, String>(string, nextString), currentString);
-                        
                         queue.addLast(new Pair<String, Integer>(nextString, distance + 1));
                     }
                 }

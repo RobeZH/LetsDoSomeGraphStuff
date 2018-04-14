@@ -59,7 +59,7 @@ public class GraphProcessorTest {
 	// When eccountered any error, or accidentally returned -1 
 	// while this method populateGraph is actually working properly
 		expected = -1; 
-		actual = processor.populateGraph("/files/word_list.txt"); ;
+		actual = processor.populateGraph("src/files/word_list.txt"); ;
 		if ( expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual + "\n error encountered!");
 	}
@@ -83,7 +83,18 @@ public class GraphProcessorTest {
 	}
 	@Test
 	public void test04_getShortestPath_get_shortest_path() {
+<<<<<<< HEAD
 		processor.populateGraph("src/files/word_list.txt");
+=======
+		dic.add("cat");
+		dic.add("rat");
+		dic.add("hat");
+		dic.add("neat");
+		dic.add("wheat");
+		dic.add("kit");
+		
+		processor.shortestPathPrecomputation();
+>>>>>>> efb5550a6fb8498c0edc9e43a840a33bf3bf702f
 		Sexpected = "[cat, hat, heat, wheat]";
 		Listactual = processor.getShortestPath(dic.get(0),dic.get(4));
 		
