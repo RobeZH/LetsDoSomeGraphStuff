@@ -101,7 +101,7 @@ public class GraphProcessorTest {
 		processor.populateGraph("files/GP_test_large.txt");		
 		processor.shortestPathPrecomputation();
 
-		Sexpected = "[qheat, qjheat, jheat, jheet, jgeet, geet]".toUpperCase();
+		Sexpected = "[qheat, jheat, jheet, jgeet, geet]".toUpperCase();
 		Listactual = processor.getShortestPath("qheat","geet"); 
 		
 		String b = Listactual.toString();
@@ -115,7 +115,7 @@ public class GraphProcessorTest {
 		processor.populateGraph("files/GP_test_large.txt");
 		processor.shortestPathPrecomputation();
 		
-		expected = 4; //[qheat, qjheat, jheat, jheet, jgeet, geet]
+		expected = 4; //[qheat, jheat, jheet, jgeet, geet]
 		actual = processor.getShortestDistance("qheat","geet");
 		System.out.println(actual);
 		if (!expected.equals(actual))
