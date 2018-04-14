@@ -115,6 +115,7 @@ public class GraphProcessor {
      * @return List<String> list of the words
      */
     public List<String> getShortestPath(String word1, String word2) {
+        word1 = word1.toUpperCase(); word2 = word2.toUpperCase();
         ArrayList<String> resList = new ArrayList<>();
         
         //des is the destination, start is the starting point
@@ -150,6 +151,7 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
+        word1 = word1.toUpperCase(); word2 = word2.toUpperCase();
         Integer dis = distanceTable.get(new Pair<String, String>(word1, word2));
         return dis == null ? -1 : dis;
     }
