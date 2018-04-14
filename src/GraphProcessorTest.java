@@ -68,7 +68,7 @@ public class GraphProcessorTest {
 	// vertice(words) added 
 		expected = 6; // TODO: MAY MODIFY this number
 		actual = processor.populateGraph("files/GP_test.txt");
-		System.out.println(actual);
+
 		if (! expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual);
 	}
@@ -81,7 +81,7 @@ public class GraphProcessorTest {
 		Listactual = processor.getShortestPath("cat","wheat"); // this line 
 		
 		String b = Listactual.toString();
-		System.out.println(b);
+
 		if (!Sexpected.equals(b))
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
@@ -105,8 +105,7 @@ public class GraphProcessorTest {
 		Listactual = processor.getShortestPath("qheat","geet"); 
 		
 		String b = Listactual.toString();
-		
-		System.out.println(Listactual);
+
 		if (!Sexpected.equals(b))
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
@@ -117,7 +116,7 @@ public class GraphProcessorTest {
 		
 		expected = 4; //[qheat, jheat, jheet, jgeet, geet]
 		actual = processor.getShortestDistance("qheat","geet");
-		System.out.println(actual);
+
 		if (!expected.equals(actual))
 			fail ("expected:"+ expected+ "actual: "+ actual);
 	}
