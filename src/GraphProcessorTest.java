@@ -77,12 +77,11 @@ public class GraphProcessorTest {
 		processor.populateGraph("files/GP_test.txt");		
 		processor.shortestPathPrecomputation();
 
-		Sexpected = "[cat, hat, heat, wheat]";
+		Sexpected = "[cat, hat, heat, wheat]".toUpperCase();
 		Listactual = processor.getShortestPath("cat","wheat"); // this line 
 		
-		StringBuilder b = new StringBuilder();
-		Listactual.forEach(b::append);
-		System.out.println(Listactual);
+		String b = Listactual.toString();
+		System.out.println(b);
 		if (!Sexpected.equals(b))
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
@@ -102,11 +101,11 @@ public class GraphProcessorTest {
 		processor.populateGraph("files/GP_test_large.txt");		
 		processor.shortestPathPrecomputation();
 
-		Sexpected = "[qheat, qjheat, jheat, jheet, jgeet, geet]";
+		Sexpected = "[qheat, qjheat, jheat, jheet, jgeet, geet]".toUpperCase();
 		Listactual = processor.getShortestPath("qheat","geet"); 
 		
-		StringBuilder b = new StringBuilder();
-		Listactual.forEach(b::append);
+		String b = Listactual.toString();
+		
 		System.out.println(Listactual);
 		if (!Sexpected.equals(b))
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
