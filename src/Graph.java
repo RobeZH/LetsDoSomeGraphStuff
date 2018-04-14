@@ -115,8 +115,7 @@ public class Graph<E> implements GraphADT<E> {
             return false;
         }
         
-        
-        return false;
+        return this.adjacencyList.get(vertex1).contains(vertex2);
     }
 
     /**
