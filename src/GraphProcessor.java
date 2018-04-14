@@ -49,7 +49,7 @@ public class GraphProcessor {
     private Hashtable<Pair<String, String>, Integer> distanceTable;
     
     /**
-     * HashTabel which stores the predecessor from one String to another String
+     * HashTable which stores the predecessor from one String to another String
      */
     private Hashtable<Pair<String, String>, String> predecessorMap;
     
