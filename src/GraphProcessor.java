@@ -125,7 +125,7 @@ public class GraphProcessor {
         //If the shotestDitance is -1, there is no shortest path
         if(getShortestDistance(word1, word2) == -1) return null;
         //Recursively find the predecessor from start to destination
-        while(des != start) {
+        while(!des.equals(start)) {
             des = predecessorMap.get(new Pair<String, String>(start, des));
             resList.add(des);
         }
