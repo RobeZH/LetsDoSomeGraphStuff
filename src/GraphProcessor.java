@@ -140,7 +140,7 @@ public class GraphProcessor {
      *             neat
      *             wheat
      *             kit
-     *  distance of the shortest path between cat and wheat, [cat, hat, heat, wheat]
+     *  distance of the shortest path between cat and wheat, [cat, hat, neat, wheat]
      *   = 3 (the number of edges in the shortest path)
      * 
      * @param word1 first word

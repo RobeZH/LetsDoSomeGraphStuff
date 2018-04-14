@@ -74,16 +74,7 @@ public class GraphProcessorTest {
 			fail("expected: "+expected+ " actual: "+actual);
 	}
 	@Test
-	public void test03_throws_IllegalArgumentException() {
-		try {
-			processor.populateGraph("write_the_filepath");
-			fail("did not throw IllegalArgumentException");
-		}catch (IllegalArgumentException e) {
-			
-		}
-	}
-	@Test
-	public void test04_getShortestPath_get_shortest_path() {
+	public void test03_getShortestPath_get_shortest_path() {
 		processor.populateGraph("files/GP_test.txt");		
 		processor.shortestPathPrecomputation();
 
@@ -97,7 +88,7 @@ public class GraphProcessorTest {
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
 	@Test
-	public void test05_getShortestDistance_get_distance_match_with_shortest_path() {
+	public void test04_getShortestDistance_match_with_shortest_path() {
 		processor.populateGraph("files/GP_test.txt");
 		processor.shortestPathPrecomputation();
 		
@@ -107,6 +98,32 @@ public class GraphProcessorTest {
 		if (!expected.equals(actual))
 			fail ("expected:"+ expected+ "actual: "+ actual);
 	}
+	@Test
+	public void test05_getShortestPath_get_shortest_path_GP_large() {
+		processor.populateGraph("files/GP_test_large.txt");		
+		processor.shortestPathPrecomputation();
+
+		Sexpected = "[qheat, qjheat, jheat, jheet, jgeet, geet]";
+		Listactual = processor.getShortestPath("qheat","geet"); 
+		
+		StringBuilder b = new StringBuilder();
+		Listactual.forEach(b::append);
+		System.out.println(Listactual);
+		if (!Sexpected.equals(b))
+			fail ("expected:"+ Sexpected+ "actual: "+ b);
+	}
+	@Test
+	public void test06_getShortestDistance_match_with_shortest_path_GP_large() {
+		processor.populateGraph("files/GP_test_large.txt");
+		processor.shortestPathPrecomputation();
+		
+		expected = 4; //[qheat, qjheat, jheat, jheet, jgeet, geet]
+		actual = processor.getShortestDistance("qheat","geet");
+		System.out.println(actual);
+		if (!expected.equals(actual))
+			fail ("expected:"+ expected+ "actual: "+ actual);
+	}
+	
 }
 
 
