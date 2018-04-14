@@ -1,4 +1,5 @@
 import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -11,9 +12,10 @@ import org.junit.Test;
 public class GraphProcessorTest {
 	private GraphProcessor processor;
 	public GraphProcessorTest() {
-		this.processor = new GraphProcessor();
+		this.processor = new GraphProcessor();	
 	}
-	ArrayList<String> dic = new ArrayList<>();
+
+	ArrayList<String> dic = new ArrayList<>(); 	 
 	
 	String Sexpected = null;
 	String Sactual = null;
@@ -81,13 +83,7 @@ public class GraphProcessorTest {
 	}
 	@Test
 	public void test04_getShortestPath_get_shortest_path() {
-		dic.add("cat");
-		dic.add("rat");
-		dic.add("hat");
-		dic.add("neat");
-		dic.add("wheat");
-		dic.add("kit");
-		
+		processor.populateGraph("src/files/word_list.txt");
 		Sexpected = "[cat, hat, heat, wheat]";
 		Listactual = processor.getShortestPath(dic.get(0),dic.get(4));
 		
@@ -98,13 +94,7 @@ public class GraphProcessorTest {
 	}
 	@Test
 	public void test05_getShortestDistance_get_distance_match_with_shortest_path() {
-		dic.add("cat");
-		dic.add("rat");
-		dic.add("hat");
-		dic.add("neat");
-		dic.add("wheat");
-		dic.add("kit");
-		
+		processor.populateGraph("src/files/word_list.txt");
 		expected = 3;
 		actual = processor.getShortestDistance(dic.get(0),dic.get(4));
 		if (!expected.equals(actual))
