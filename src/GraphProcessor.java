@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javafx.util.Pair;
 
@@ -80,10 +81,7 @@ public class GraphProcessor {
         } catch (IOException e) {
             return 0;
         }
-        ArrayList<String> wordList = new ArrayList<String>();
-        
-        Collections.sort(wordList);
-        stream.distinct().forEach(wordList::add);
+        List<String> wordList = stream.collect(Collectors.toList());
         
         for(String string : wordList)
             graph.addVertex(string);

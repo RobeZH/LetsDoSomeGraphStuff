@@ -66,7 +66,6 @@ public class WordProcessor {
 		 */
 		Stream<String> s;
 		s = Files.lines(Paths.get(filepath)).map(String::toUpperCase).map(String::trim).filter(x -> x != "" && x != null);
-	    s.close();
 		return s;
 	}
 	
@@ -88,44 +87,28 @@ public class WordProcessor {
 	 * @return true if word1 and word2 are adjacent else false
 	 */
 	public static boolean isAdjacent(String word1, String word2) {
-	    String alphabet = "abcdefghijklmnopqrstuvwxyz";
-	    word1 = word1.toLowerCase();
-        word2 = word2.toLowerCase();
+        if(Math.abs(word1.length() - word2.length()) > 1) return false;
         
-        boolean found = false;
 	    if (word1.length() == word2.length()) {
-	        // replacement
-	        for (int i = 0; i < word1.length() ;i++) {
-	            for (int j = 0; j < alphabet.length(); j++) {
-	                char letter = alphabet.charAt(j);
-	                String testWord1 = word1.substring(0, i) + letter + word1.substring(i+1,word1.length());
-	                if (testWord1.equals(word2)) { 
-	                    return true;
-	                }
-	            }
+	        int count = 0;
+	        for(int i = 0; i < word1.length(); i++) {
+	            if(word1.charAt(i) != word2.charAt(i)) count ++;
 	        }
-	    } else if (word1.length() - word2.length() == -1) {
-	        // addition
-	        for (int i = 0; i <= word1.length(); i++) {
-                for (int j = 0; j < alphabet.length(); j++) {
-                    char letter = alphabet.charAt(j);
-                    String testWord1 = word1.substring(0, i) + letter + word1.substring(i,word1.length());
-                    System.out.println(testWord1);
-                    if (testWord1.equals(word2)) { 
-                        return true;
-                    }
-                }
-	        }
-	    } else if (word1.length() - word2.length() == 1) {
-	        // deletion
-	        for (int i = 0; i < word1.length(); i++) {
-	            String testWord1 = word1.substring(0,i) + word1.substring(i+1,word1.length());
-	            if (testWord1.equals(word2)) { 
-	                return true;
-	            }
-	        }
+	        return count == 1;
 	    }
-	    return false;
+        if(word1.length() < word2.length()) {
+            String tmp = word1; word1 = word2; word2 = tmp;
+        }
+        
+        int dcount = 0;
+        for(int i = 0; i < word2.length(); i++) {
+            if(word2.charAt(i) != word1.charAt(i+dcount)) {
+                dcount ++; i--;
+                if(dcount > 1) return false;
+            }
+        }
+        return true;
+
 	}
 	
 }
