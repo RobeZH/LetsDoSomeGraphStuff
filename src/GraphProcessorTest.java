@@ -87,10 +87,11 @@ public class GraphProcessorTest {
 		processor.shortestPathPrecomputation();
 
 		Sexpected = "[cat, hat, heat, wheat]";
-		Listactual = processor.getShortestPath("cat","wheat");
+		Listactual = processor.getShortestPath("cat","wheat"); // this line 
 		
 		StringBuilder b = new StringBuilder();
 		Listactual.forEach(b::append);
+		System.out.println(Listactual);
 		if (!Sexpected.equals(b))
 			fail ("expected:"+ Sexpected+ "actual: "+ b);
 	}
@@ -101,7 +102,7 @@ public class GraphProcessorTest {
 		
 		expected = 3;
 		actual = processor.getShortestDistance("cat","wheat");
-		System.out.println(actual);
+		
 		if (!expected.equals(actual))
 			fail ("expected:"+ expected+ "actual: "+ actual);
 	}
