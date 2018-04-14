@@ -101,6 +101,7 @@ public class GraphProcessorTest {
 		
 		expected = 3;
 		actual = processor.getShortestDistance("cat","wheat");
+		System.out.println(actual);
 		if (!expected.equals(actual))
 			fail ("expected:"+ expected+ "actual: "+ actual);
 	}
