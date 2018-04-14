@@ -1,16 +1,11 @@
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.TestCase;
-import static org.junit.Assert.*;
-import org.junit.Test;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 
 public class GraphProcessorTest {
@@ -56,12 +51,13 @@ public class GraphProcessorTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
+	@Test
 	public void test01_populateGraph_encounter_error() { 
 	// When eccountered any error, or accidentally returned -1 
 	// while this method populateGraph is actually working properly
 		expected = -1; 
-		actual = processor.populateGraph("write_the_filepath"); ;
+		actual = processor.populateGraph("/files/word_list.txt"); ;
 		if ( expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual + "\n error encountered!");
 	}
@@ -69,8 +65,8 @@ public class GraphProcessorTest {
 	public void test02_populateGraph_return_correct_number() {
 	// See if the populateGraph returns the correct number of 
 	// vertice(words) added 
-		expected = 10; // TODO: MAY MODIFY this number
-		actual = processor.populateGraph("write_the_filepath");
+		expected = 441; // TODO: MAY MODIFY this number
+		actual = processor.populateGraph("src/files/word_list.txt");
 		if (! expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual);
 	}
