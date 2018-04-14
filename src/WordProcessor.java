@@ -93,16 +93,22 @@ public class WordProcessor {
 	        for(int i = 0; i < word1.length(); i++) {
 	            if(word1.charAt(i) != word2.charAt(i)) count ++;
 	        }
+	        
+	        //true only if the difference is 1
 	        return count == 1;
 	    }
         if(word1.length() < word2.length()) {
             String tmp = word1; word1 = word2; word2 = tmp;
         }
         
+        // The number of difference between the words
         int dcount = 0;
+        
         for(int i = 0; i < word2.length(); i++) {
             if(word2.charAt(i) != word1.charAt(i+dcount)) {
                 dcount ++; i--;
+                
+                //the difference is more than one
                 if(dcount > 1) return false;
             }
         }
