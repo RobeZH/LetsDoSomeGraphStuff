@@ -96,10 +96,10 @@ public class GraphProcessorTest {
 	}
 	@Test
 	public void test05_getShortestDistance_get_distance_match_with_shortest_path() {
-		String str;
 		processor.populateGraph("src/files/word_list.txt");
-		expected = 3;
 		processor.shortestPathPrecomputation();
+		
+		expected = 3;
 		actual = processor.getShortestDistance("cat","neat");
 		if (!expected.equals(actual))
 			fail ("expected:"+ expected+ "actual: "+ actual);
